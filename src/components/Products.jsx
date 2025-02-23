@@ -6,10 +6,11 @@ import useProductFilter from './useProductFilter';
 import { useEffect } from 'react';
 import { fetchCategories } from '../store/actions';
 import Loader from './Loader';
+import Paginations from './Paginations';
 
 const Products = () => {
   const { isLoading, errorMessage } = useSelector((state) => state.errors);
-  const { products, categories } = useSelector((state) => state.products);
+  const { products, categories, pagination } = useSelector((state) => state.products);
 
   useProductFilter();
 
@@ -39,6 +40,9 @@ const Products = () => {
                 products &&
                 products.map((item, index) => <ProductCard key={index} {...item} />)
               }
+            </div>
+            <div className='flex justify-center pt-10'>
+              <Paginations numberOfPages={pagination?.totalPages} totalProducts={pagination?.totalElements} />
             </div>
           </div>
         )

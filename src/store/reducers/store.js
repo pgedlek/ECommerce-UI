@@ -3,7 +3,7 @@ import { productReducer } from "./productReducer";
 import { errorReducer } from "./errorReducer";
 import { cartReducer } from "./cartReducer";
 
-const cartItems = localStorage.getItem("cartItems")
+const cartItems = localStorage.getItem("cartItems") && localStorage.getItem("cartItems") !== "undefined"
   ? JSON.parse(localStorage.getItem("cartItems"))
   : [];
 

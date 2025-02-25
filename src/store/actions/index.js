@@ -85,7 +85,7 @@ export const increaseCartQuantity = (data, toast, currentQty, setCurrrentQty) =>
     });
     localStorage.setItem("cartItems", JSON.stringify(getState().carts.cart));
   } else {
-    toast.error("Quantity reached to limit")
+    toast.error("Quantity reached to limit");
   }
 }
 
@@ -97,5 +97,14 @@ export const decreaseCartQuantity = (data, newQty) => (dispatch, getState) => {
       quantity: newQty
     }
   });
+  localStorage.setItem("cartItems", JSON.stringify(getState().carts.cart));
+}
+
+export const removeFromCart = (data, toast) => (dispatch, getState) => {
+  dispatch({
+    type: "REMOVE_FROM_CART",
+    payload: data
+  });
+  toast.success(`${data.productName} was removed from cart.`);
   localStorage.setItem("cartItems", JSON.stringify(getState().carts.cart));
 }

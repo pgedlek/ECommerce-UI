@@ -3,14 +3,18 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLogin } from "react-icons/ai";
 import InputField from "../shared/InputField";
+import { useDispatch } from "react-redux";
+import { authenticateSingInUser } from "../../store/actions";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onTouched' });
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({ mode: 'onTouched' });
 
   const loginHandler = async (data) => {
-    console.log('Login!')
+    dispatch(authenticateSingInUser(data, toast, reset, navigate, setLoader))
   }
 
   return (

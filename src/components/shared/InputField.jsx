@@ -27,7 +27,7 @@ const InputField = ({
           minLength: min
             ? { value: min, message: `Minimum ${min} characters is required` }
             : null,
-          pattern: type === email
+          pattern: type === "email"
             ? { value: /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+com+$/, message: "Invalid email" }
             : type === "url"
               ? { value: /^(https?:\/\/)?(([a-zA-Z0-9\u00a1-\uffff-]+\.)+[a-zA-Z\u00a1-\uffff]{2,})(:\d{2,5})?(\/[^\s]*)?$/, message: "Please enter a valid url" }

@@ -10,7 +10,7 @@ const cartItems = localStorage.getItem("cartItems") && localStorage.getItem("car
 
 const user = localStorage.getItem("auth") && localStorage.getItem("auth") !== "undefined"
   ? JSON.parse(localStorage.getItem("auth"))
-  : [];
+  : null;
 
 const initialState = {
   auth: { user: user },

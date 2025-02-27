@@ -11,6 +11,7 @@ import React from 'react';
 import Cart from './components/cart/Cart';
 import Login from './components/auth/Login';
 import PrivateRoute from './components/shared/PrivateRoute';
+import Register from './components/auth/Register';
 
 function App() {
   return (
@@ -23,8 +24,10 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/cart' element={<Cart />} />
+
           <Route path="/" element={<PrivateRoute publicPage />}>
             <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
           </Route>
         </Routes>
       </BrowserRouter>

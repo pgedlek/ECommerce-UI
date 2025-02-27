@@ -123,7 +123,22 @@ export const authenticateSingInUser = (sentData, toast, reset, navigate, setLoad
     navigate("/");
   } catch (error) {
     console.error(error);
-    toast.error(error?.response.data.message || "Internal server error");
+    toast.error(error?.response?.data?.message || "Internal server error");
+  } finally {
+    setLoader(false);
+  }
+}
+
+export const registerNewUser = (sentData, toast, reset, navigate, setLoader) => async (dispatch) => {
+  try {
+    setLoader(true);
+    const { data } = await api.post("/auth/signup", sentData);
+    reset();
+    toast.success(data?.message || "User registered successfully!");
+    navigate("/login");
+  } catch (error) {
+    console.error(error);
+    toast.error(error?.response?.data?.message || "Internal server error");
   } finally {
     setLoader(false);
   }

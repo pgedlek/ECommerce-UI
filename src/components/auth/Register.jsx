@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "../shared/InputField";
 import { useDispatch } from "react-redux";
-import { authenticateSingInUser } from "../../store/actions";
+import { registerNewUser } from "../../store/actions";
 import toast from "react-hot-toast";
 import { FaUserPlus } from "react-icons/fa";
 
@@ -14,8 +14,7 @@ const Register = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({ mode: 'onTouched' });
 
   const registerHandler = async (data) => {
-    console.log('register');
-    //dispatch(authenticateSingInUser(data, toast, reset, navigate, setLoader))
+    dispatch(registerNewUser(data, toast, reset, navigate, setLoader))
   }
 
   return (

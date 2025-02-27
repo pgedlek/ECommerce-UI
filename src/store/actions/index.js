@@ -143,3 +143,11 @@ export const registerNewUser = (sentData, toast, reset, navigate, setLoader) => 
     setLoader(false);
   }
 }
+
+export const logout = (navigate) => (dispatch) => {
+  dispatch({
+    type: "LOG_OUT",
+  });
+  localStorage.removeItem("auth");
+  navigate("/login");
+}

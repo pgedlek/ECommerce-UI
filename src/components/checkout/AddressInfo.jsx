@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Skeletons from '../shared/Skeletons';
 import { FaAddressBook } from 'react-icons/fa';
+import AddressInfoModal from './AddressInfoModal';
+import AddAddressForm from './AddAddressForm';
 
 const AddressInfo = () => {
+  const [openAddressModal, setOpenAddressModal] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState("");
+
   const noAddressExist = true;
   const isLoading = false;
+
+  const addNewAddressHandler = () => {
+    setSelectedAddress("");
+    setOpenAddressModal(true);
+  }
 
   return (
     <div className='pt-4'>
@@ -17,25 +27,34 @@ const AddressInfo = () => {
           <p className='mb-6 text-slate-800 text-center'>
             Please add your address to complete purchase
           </p>
+          <button onClick={addNewAddressHandler}
+            className='px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition-all'>
+            Add address
+          </button>
         </div>
       ) : (
-        <div>
-          <div className='relative p-6 rounded-lg max-w-md mx-auto'>
-            <h1 className='text-slate-800 text-center font-bold text-2xl'>
-              Select address
-            </h1>
-            {isLoading ? (
-              <div className='py-4 px-8'>
-                <Skeletons />
-              </div>
-            ) : (
-              <div className='space-y-4 pt-6'>
-                <p>Address list here...</p>
-              </div>
-            )}
-          </div>
+        <div className='relative p-6 rounded-lg max-w-md mx-auto'>
+          <h1 className='text-slate-800 text-center font-bold text-2xl'>
+            Select address
+          </h1>
+          {isLoading ? (
+            <div className='py-4 px-8'>
+              <Skeletons />
+            </div>
+          ) : (
+            <div className='space-y-4 pt-6'>
+              <p>Address list here...</p>
+            </div>
+          )}
         </div>
       )}
+
+      <AddressInfoModal
+        open={openAddressModal}
+        setOpen={setOpenAddressModal}
+      >
+        <AddAddressForm />
+      </AddressInfoModal>
     </div>
   )
 }

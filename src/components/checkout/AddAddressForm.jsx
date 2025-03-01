@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { AiOutlineLogin } from 'react-icons/ai';
+import React from 'react';
 import InputField from '../shared/InputField';
 import Spinners from '../shared/Spinners';
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FaAddressCard } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { addUpdateUserAddress } from '../../store/actions';
 
-const AddAddressForm = () => {
+const AddAddressForm = ({ address, setOpenAddressModal }) => {
+  const dispatch = useDispatch();
   const { btnLoader } = useSelector((state) => state.errors);
-  const [loader, setLoader] = useState(false);
   const { register, handleSubmit, formState: { errors }, reset } = useForm({ mode: 'onTouched' });
 
   const onSaveHandler = async (data) => {
-
+    dispatch(addUpdateUserAddress(data, address?.addressId, toast, setOpenAddressModal))
   }
 
   return (
@@ -42,8 +42,7 @@ const AddAddressForm = () => {
               </>
             ) : (
               <>Save</>
-            )
-            }
+            )}
           </button>
         </div>
       </form>

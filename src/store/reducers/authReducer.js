@@ -1,5 +1,6 @@
 const initialState = {
   user: null,
+  userdetails: null,
   address: [],
 }
 
@@ -10,6 +11,11 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         user: action.payload
       };
+    case "USER_DETAILS":
+      return {
+        ...state,
+        userdetails: action.payload,
+      }
     case "USER_ADDRESS":
       return {
         ...state,
@@ -19,6 +25,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         user: null,
         address: null,
+        userdetails: null,
       };
     default:
       return state;

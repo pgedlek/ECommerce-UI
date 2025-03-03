@@ -187,3 +187,21 @@ export const getUserAddresses = () => async (dispatch) => {
     });
   }
 }
+
+export const getUserDetails = () => async (dispatch) => {
+  try {
+    dispatch({ type: "IS_FETCHING" });
+    const { data } = await api.get(`/auth/userdetails`);
+    dispatch({
+      type: "USER_DETAILS",
+      payload: data
+    });
+    dispatch({ type: "IS_SUCCESS" });
+  } catch (error) {
+    console.error(error);
+    dispatch({
+      type: "IS_ERROR",
+      payload: error?.response?.data?.message || 'Failed to fetch user details'
+    });
+  }
+}

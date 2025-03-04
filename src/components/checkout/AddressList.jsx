@@ -1,14 +1,15 @@
 import React from 'react';
 import { FaBuilding, FaCheckCircle, FaEdit, FaStreetView, FaTrash } from 'react-icons/fa';
 import { MdLocationCity, MdPinDrop, MdPublic } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectedUserCheckoutAddress } from '../../store/actions';
 
 const AddressList = ({ addresses, setSelectedAddress, setOpenAddressModal }) => {
+  const { selectedUserAddress } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const selectedUserAddress = addresses[1];
 
-  const handleAddressSelection = (address) => {
-
+  const handleAddressSelection = (addresses) => {
+    dispatch(selectedUserCheckoutAddress(addresses))
   };
 
   const onEditButtonHandler = (address) => {

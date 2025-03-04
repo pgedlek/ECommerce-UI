@@ -205,3 +205,10 @@ export const getUserDetails = () => async (dispatch) => {
     });
   }
 }
+
+export const selectedUserCheckoutAddress = (address) => {
+  return {
+    type: "SELECT_CHECKOUT_ADDRESS",
+    payload: address,
+  }
+} 

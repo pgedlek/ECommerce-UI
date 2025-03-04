@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import InputField from '../shared/InputField';
 import Spinners from '../shared/Spinners';
 import { useForm } from 'react-hook-form';
@@ -10,11 +10,22 @@ import { addUpdateUserAddress } from '../../store/actions';
 const AddAddressForm = ({ address, setOpenAddressModal }) => {
   const dispatch = useDispatch();
   const { btnLoader } = useSelector((state) => state.errors);
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({ mode: 'onTouched' });
+  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({ mode: 'onTouched' });
 
   const onSaveHandler = async (data) => {
     dispatch(addUpdateUserAddress(data, address?.addressId, toast, setOpenAddressModal))
   }
+
+  useEffect(() => {
+    if (address?.addressId) {
+      setValue("building", address?.buildingName);
+      setValue("city", address?.city);
+      setValue("street", address?.street);
+      setValue("state", address?.state);
+      setValue("pincode", address?.pincode);
+      setValue("country", address?.country);
+    }
+  }, [address]);
 
   return (
     <div className="min-h-[calc(100vh-64px)] flex justify-center items-center">
@@ -22,8 +33,7 @@ const AddAddressForm = ({ address, setOpenAddressModal }) => {
         className="sm:w-[450px] w-[360px] shadow-custom py-8 sm:px-8 px-4 rounded-md">
         <div className="flex items-center justify-center mb-4 font-semibold text-2xl text-slate-800 py-2 px-4">
           <FaAddressCard className="mr-2 text-2xl" />
-          Add Aaddress
-
+          {!address?.addressId ? 'Add Address' : 'Update address'}
         </div>
 
         <div className="flex flex-col gap-4">

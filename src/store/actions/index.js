@@ -153,7 +153,6 @@ export const logout = (navigate) => (dispatch) => {
 }
 
 export const addUpdateUserAddress = (sentData, addressId, toast, setOpenAddressModal) => async (dispatch, getState) => {
-  //const { user } = getState().auth;
   dispatch({
     type: "BUTTON_LOADER"
   });
@@ -216,4 +215,29 @@ export const selectedUserCheckoutAddress = (address) => {
     type: "SELECT_CHECKOUT_ADDRESS",
     payload: address,
   }
-} 
+}
+
+export const clearCheckoutAddress = () => {
+  return {
+    type: "REMOVE_CHECKOUT_ADDRESS",
+  }
+}
+
+export const deleteUserAddress = (toast, addressId, setOpenDeleteModal) => async (dispatch) => {
+  try {
+    dispatch({ type: "BTN_LOADER" });
+    await api.delete(`/addresses/${addressId}`);
+    dispatch({ type: "IS_SUCCESS" });
+    dispatch(getUserAddresses());
+    dispatch(clearCheckoutAddress());
+    toast.success("Address deleted succcessfully!");
+  } catch (error) {
+    console.error(error);
+    dispatch({
+      type: "IS_ERROR",
+      payload: error?.response?.data?.message || 'Some error occurred while deleting address'
+    });
+  } finally {
+    setOpenDeleteModal(false);
+  }
+}

@@ -18,7 +18,7 @@ const AddAddressForm = ({ address, setOpenAddressModal }) => {
 
   useEffect(() => {
     if (address?.addressId) {
-      setValue("building", address?.buildingName);
+      setValue("buildingName", address?.buildingName);
       setValue("city", address?.city);
       setValue("street", address?.street);
       setValue("state", address?.state);
@@ -37,7 +37,7 @@ const AddAddressForm = ({ address, setOpenAddressModal }) => {
         </div>
 
         <div className="flex flex-col gap-4">
-          <InputField label="Building name" required id="building" type="text" message="Building name is required" placeholder="Enter your building name" register={register} errors={errors} />
+          <InputField label="Building name" required id="buildingName" type="text" message="Building name is required" placeholder="Enter your building name" register={register} errors={errors} />
           <InputField label="City" required id="city" type="text" message="City is required" placeholder="Enter your city" register={register} errors={errors} />
           <InputField label="State" required id="state" type="text" message="State is required" placeholder="Enter your state" register={register} errors={errors} />
           <InputField label="Pincode" required id="pincode" type="text" message="Pincode is required" placeholder="Enter your pincode" register={register} errors={errors} />
